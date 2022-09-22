@@ -63,7 +63,6 @@ public class EmployeeController {
     }
 
     @GetMapping("/{id}")
-    //@PreAuthorize("hasRole('admin')")
     public Employee getEmployee(@PathVariable Long id){
         if(employeeService.getEmployee(id).isPresent())
             return employeeService.getEmployee(id).get();
