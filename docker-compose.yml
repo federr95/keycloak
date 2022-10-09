@@ -5,8 +5,6 @@ services:
     image: application
     ports:
       - "8080:8080"
-    networks:
-      - application-network
 
 #  postgres-application:
 #    image: postgres
@@ -44,8 +42,6 @@ services:
       KEYCLOAK_USER: admin
       KEYCLOAK_PASSWORD: password
 
-    networks:
-      - application-network
     ports:
       - "8081:8080"
     depends_on:
@@ -54,7 +50,3 @@ services:
 volumes:
   keycloak_data:
     driver: local
-
-networks:
-  application-network:
-    driver: bridge
