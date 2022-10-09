@@ -2,18 +2,12 @@ version: '3.8'
 
 services:
 
-  postgres:
-    image: postgres
+  application:
+    image: application
     ports:
-      - "5432:5432"
-    volumes:
-      - keycloak_data:/var/lib/keycloak/data
+      - "8080:8080"
     networks:
       - application-network
-    environment:
-      POSTGRES_DB: keycloak
-      POSTGRES_USER: keycloak
-      POSTGRES_PASSWORD: password
 
   keycloak:
     image: jboss/keycloak
