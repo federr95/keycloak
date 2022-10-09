@@ -8,6 +8,7 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import com.example.web_app_test.services.EmployeeService;
 import org.springframework.web.server.ResponseStatusException;
@@ -23,6 +24,7 @@ public class EmployeeController {
     EmployeeService employeeService;
 
     @GetMapping("/allEmployee")
+    @PreAuthorize("hasAnyRole('user', 'admin')")
     public List<Employee> getEmployeeList(@RequestParam (name="access_token") String token) {
 
         String[] chunks = token.split("\\.");
@@ -63,6 +65,7 @@ public class EmployeeController {
     }
 
     @GetMapping("/{id}")
+    @PreAuthorize("hasRole('user')")
     public Employee getEmployee(@PathVariable Long id){
         if(employeeService.getEmployee(id).isPresent())
             return employeeService.getEmployee(id).get();
@@ -71,6 +74,7 @@ public class EmployeeController {
     }
 
     @PostMapping("/{id}/addRole")
+    @PreAuthorize("hasRole('admin')")
     public boolean addRoleToEmployee(@PathVariable Long id, @RequestBody Role role){
         if(employeeService.getEmployee(id).isPresent()){
             employeeService.addRoleToEmployee(id, role);
@@ -79,7 +83,7 @@ public class EmployeeController {
     }
 
     @PostMapping("/addEmployee")
-    //@PreAuthorize("hasRole('user')")
+    @PreAuthorize("hasRole('admin')")
     public  boolean addEmployee(@RequestBody Employee employee){
         if(employeeService.getEmployee(employee.getEmployeeId()).isEmpty())
             return employeeService.createEmployee(employee);

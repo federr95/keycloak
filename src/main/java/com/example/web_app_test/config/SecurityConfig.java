@@ -19,8 +19,7 @@ import org.springframework.security.web.authentication.session.SessionAuthentica
 @KeycloakConfiguration
 @EnableGlobalMethodSecurity(jsr250Enabled = true)
 @Import(KeycloakSpringBootConfigResolver.class)
-public class SecurityConfig extends KeycloakWebSecurityConfigurerAdapter
-{
+public class SecurityConfig extends KeycloakWebSecurityConfigurerAdapter {
     /**
      * Registers the KeycloakAuthenticationProvider with the authentication manager.
      */
@@ -52,12 +51,12 @@ public class SecurityConfig extends KeycloakWebSecurityConfigurerAdapter
         http
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/API/employee/allEmployee").hasAnyRole("user", "admin")
-                .antMatchers("/API/employee/addEmployee").hasRole("admin")
-                .antMatchers("/API/companies/allCompanies").permitAll()
-                .antMatchers("/API/companies/addCompany").hasRole("admin")
-                .antMatchers("/API/companies/**/enrollSupplier").permitAll()
-                .antMatchers("/API/employee/**/addRole").permitAll()
+//                .antMatchers("/API/employee/allEmployee").hasAnyRole("user", "admin")
+//                .antMatchers("/API/employee/addEmployee").hasRole("admin")
+//                .antMatchers("/API/companies/allCompanies").permitAll()
+//                .antMatchers("/API/companies/addCompany").hasRole("admin")
+//                .antMatchers("/API/companies/**/enrollSupplier").permitAll()
+//                .antMatchers("/API/employee/**/addRole").permitAll()
                 .anyRequest().permitAll();
     }
 }
