@@ -8,11 +8,18 @@ import com.example.web_app_test.repositories.CompanyRepository;
 import com.example.web_app_test.repositories.EmployeeRepository;
 import com.example.web_app_test.repositories.RoleRepository;
 import com.example.web_app_test.repositories.SupplierRepository;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.modelmapper.ModelMapper;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 
@@ -30,6 +37,16 @@ public class WebAppTestApplication {
 		return new CommandLineRunner() {
 			@Override
 			public void run(String... args) throws Exception {
+				RestTemplate restTemplate = new RestTemplate();
+
+				String resourceUrl = "http://localhost:8080/API/companies/allCompanies";
+				ResponseEntity<String> response = restTemplate.getForEntity(resourceUrl, String.class);
+				System.out.println("this is the response" + response.getBody());
+
+				ObjectMapper mapper = new ObjectMapper();
+				JsonNode root = mapper.readTree(response.getBody());
+				System.out.println(root.get("companyName"));
+
 
 				/*Company company = new Company("RossiCompany");
 				Company company1 = new Company("ViolaCompany");
