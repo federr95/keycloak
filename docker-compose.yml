@@ -1,30 +1,12 @@
 version: '3.8'
 services:
 
-  application:
-    image: application
-    ports:
-      - "8080:8080"
-
-#  postgres-application:
-#    image: postgres
-#    ports:
-#      - "5433:5432"
-#    volumes:
-#      - application_data:/var/lib/application/data
-#    environment:
-#      POSTGRES_DB: application
-#      POSTGRES_USER: application
-#      POSTGRES_PASSWORD: password
-
   postgres-keycloak:
     image: postgres
     ports:
       - "5432:5432"
     volumes:
       - keycloak_data:/var/lib/keycloak/data
-    networks:
-      - application-network
     environment:
       POSTGRES_DB: keycloak
       POSTGRES_USER: keycloak
@@ -41,7 +23,8 @@ services:
       DB_PASSWORD: password
       KEYCLOAK_USER: admin
       KEYCLOAK_PASSWORD: password
-
+      # Uncomment the line below if you want to specify JDBC parameters. The parameter below is just an example, and it shouldn't be used in production without knowledge. It is highly recommended that you read the PostgreSQL JDBC driver documentation in order to use it.
+      #JDBC_PARAMS: "ssl=true"
     ports:
       - "8081:8080"
     depends_on:
