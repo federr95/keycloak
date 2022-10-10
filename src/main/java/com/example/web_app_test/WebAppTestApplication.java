@@ -72,10 +72,10 @@ public class WebAppTestApplication {
 				Role superUserRole = new Role("superUser");
 				roleRepository.saveAndFlush(userRole);
 				roleRepository.saveAndFlush(adminRole);
-				roleRepository.saveAndFlush(superUserRole);
+				roleRepository.saveAndFlush(superUserRole);*/
 
 
-				/*Employee employee = new Employee(100L, "franco", "rossi");
+				Employee employee = new Employee(100L, "franco", "rossi");
 				Employee employee2 = new Employee(101L, "mario", "bianchi");
 				Employee employee3 = new Employee(102L, "giorgio", "viola");
 				employeeRepository.save(employee);
@@ -87,7 +87,7 @@ public class WebAppTestApplication {
 
 				if(!companyNameList.contains("RossiCompany")){
 					Company company = new Company("RossiCompany");
-					companyRepository.save(company);1
+					companyRepository.save(company);
 					employee.setCompany(company);
 					employeeRepository.save(employee);
 					employee3.setCompany(company);
@@ -112,7 +112,7 @@ public class WebAppTestApplication {
 				List<String> roleList = roleRepository.findAll().stream()
 						.map((Role::getRoleType)).toList();
 
-				/*if(!roleList.contains("user")) {
+				if(!roleList.contains("user")) {
 					Role role = new Role("user");
 					employee.addRole(role);
 					roleRepository.save(role);
@@ -132,7 +132,7 @@ public class WebAppTestApplication {
 				if(!roleList.contains("super-user")) {
 					Role role = new Role("super-user");
 					roleRepository.save(role);
-				}*/
+				}
 
 			}
 		};

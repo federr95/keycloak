@@ -1,35 +1,60 @@
+####################################
+## Version with keycloak
+####################################
+
+#version: '3.9'
+#services:
+#
+#  postgres-keycloak:
+#    image: postgres
+#    ports:
+#      - "5432:5432"
+#    volumes:
+#      - keycloak_data:/var/lib/keycloak/data
+#    environment:
+#      POSTGRES_DB: keycloak
+#      POSTGRES_USER: keycloak
+#      POSTGRES_PASSWORD: password
+#
+#  keycloak:
+#    image: jboss/keycloak
+#    environment:
+#      DB_VENDOR: POSTGRES
+#      DB_ADDR: postgres
+#      DB_DATABASE: keycloak
+#      DB_USER: keycloak
+#      DB_SCHEMA: public
+#      DB_PASSWORD: password
+#      KEYCLOAK_USER: admin
+#      KEYCLOAK_PASSWORD: password
+#      # Uncomment the line below if you want to specify JDBC parameters. The parameter below is just an example, and it shouldn't be used in production without knowledge. It is highly recommended that you read the PostgreSQL JDBC driver documentation in order to use it.
+#      #JDBC_PARAMS: "ssl=true"
+#    ports:
+#      - "8081:8080"
+#    depends_on:
+#      - postgres-keycloak
+#
+#volumes:
+#  keycloak_data:
+#    driver: local
+
+####################################
+## Version without keycloak
+####################################
+
 version: '3.8'
 services:
 
-  postgres-keycloak:
+  postgres:
     image: postgres
     ports:
       - "5432:5432"
     volumes:
-      - keycloak_data:/var/lib/keycloak/data
+      - web_app_test:/var/lib/web_app_test
     environment:
-      POSTGRES_DB: keycloak
-      POSTGRES_USER: keycloak
+      POSTGRES_DB: web_app_test
+      POSTGRES_USER: web_app_test
       POSTGRES_PASSWORD: password
 
-  keycloak:
-    image: jboss/keycloak
-    environment:
-      DB_VENDOR: POSTGRES
-      DB_ADDR: postgres
-      DB_DATABASE: keycloak
-      DB_USER: keycloak
-      DB_SCHEMA: public
-      DB_PASSWORD: password
-      KEYCLOAK_USER: admin
-      KEYCLOAK_PASSWORD: password
-      # Uncomment the line below if you want to specify JDBC parameters. The parameter below is just an example, and it shouldn't be used in production without knowledge. It is highly recommended that you read the PostgreSQL JDBC driver documentation in order to use it.
-      #JDBC_PARAMS: "ssl=true"
-    ports:
-      - "8081:8080"
-    depends_on:
-      - postgres-keycloak
-
 volumes:
-  keycloak_data:
-    driver: local
+  web_app_test:
