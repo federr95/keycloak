@@ -1,0 +1,11 @@
+applicationName: application
+
+deploymentApplication:
+  replicaCount: 3
+  image: web_app_test_image_minikube
+  pullPolicy: IfNotPresent
+  containerPort: 8080
+
+serviceApplication:
+  type: NodePort
+  port: 8080
