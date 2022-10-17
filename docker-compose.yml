@@ -49,8 +49,8 @@ services:
     image: postgres
     ports:
       - "5432:5432"
-    volumes:
-      - web_app_test:/var/lib/web_app_test
+#    volumes:
+#      - web_app_test:/var/lib/web_app_test
     environment:
       POSTGRES_DB: web_app_test
       POSTGRES_USER: web_app_test
